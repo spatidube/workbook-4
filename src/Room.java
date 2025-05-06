@@ -1,46 +1,20 @@
+// Room class - represents a room in the hotel
 public class Room {
-    int numberOfBeds;
-    double price;
-    boolean dirty;
-    boolean occupied;
+    int number;
+    boolean isOccupied;
 
-    public boolean isAvailable() {
-      //a.  boolean returnValue = !dirty && !occupied;  // Derived getter this will either be true- this expression( returns a value) is is not dirty and isn't ocupied
-        // a. return returnValue;
-
-        if(!dirty && !occupied) {
-            return true;
-        }
-        else {
-            return false;
-        }
+    public Room(int number) {
+        this.number = number;
+        this.isOccupied = false;
     }
 
-    public int getNumberOfBeds() {
-        return numberOfBeds;
+    public void assignToGuest() {
+        isOccupied = true;
+        System.out.println("Room " + number + " is now occupied.");
     }
 
-    public void setNumberOfBeds(int numberOfBeds) {
-        this.numberOfBeds = numberOfBeds;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public boolean isDirty() {
-        return dirty;
-    }
-
-    public void setDirty(boolean dirty) {
-        this.dirty = dirty;
-    }
-
-    public void setOccupied(boolean occupied) {
-        this.occupied = occupied;
+    public void cleanRoom() {
+        isOccupied = false;
+        System.out.println("Room " + number + " has been cleaned.");
     }
 }

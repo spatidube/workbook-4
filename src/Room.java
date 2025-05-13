@@ -1,20 +1,49 @@
-// Room class - represents a room in the hotel
-public class Room {
-    int number;
-    boolean isOccupied;
 
-    public Room(int number) {
-        this.number = number;
-        this.isOccupied = false;
+public class Room {
+    private int numberOfBeds;
+    private double price;
+    private boolean occupied;
+    private boolean dirty;
+
+    public Room(int numberOfBeds, double price, boolean occupied, boolean dirty) {
+        this.numberOfBeds = numberOfBeds;
+        this.price = price;
+        this.occupied = occupied;
+        this.dirty = dirty;
     }
 
-    public void assignToGuest() {
-        isOccupied = true;
-        System.out.println("Room " + number + " is now occupied.");
+    public int getNumberOfBeds() {
+        return numberOfBeds;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public boolean isOccupied() {
+        return occupied;
+    }
+
+    public boolean isDirty() {
+        return dirty;
+    }
+
+    public boolean isAvailable() {
+        return !occupied && !dirty;
+    }
+
+    // ✅ Make sure this method is here and correctly spelled
+    public void checkIn() {
+        this.occupied = true;
+        this.dirty = true;
+    }
+
+    public void checkout() {
+        this.occupied = false;
+        this.dirty = true;
     }
 
     public void cleanRoom() {
-        isOccupied = false;
-        System.out.println("Room " + number + " has been cleaned.");
+        this.dirty = false;
     }
 }

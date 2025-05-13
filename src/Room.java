@@ -1,15 +1,14 @@
-
 public class Room {
     private int numberOfBeds;
     private double price;
-    private boolean occupied;
-    private boolean dirty;
+    private boolean isOccupied;
+    private boolean isDirty;
 
-    public Room(int numberOfBeds, double price, boolean occupied, boolean dirty) {
+    public Room(int numberOfBeds, double price, boolean isOccupied, boolean isDirty) {
         this.numberOfBeds = numberOfBeds;
         this.price = price;
-        this.occupied = occupied;
-        this.dirty = dirty;
+        this.isOccupied = isOccupied;
+        this.isDirty = isDirty;
     }
 
     public int getNumberOfBeds() {
@@ -21,29 +20,42 @@ public class Room {
     }
 
     public boolean isOccupied() {
-        return occupied;
+        return isOccupied;
     }
 
     public boolean isDirty() {
-        return dirty;
+        return isDirty;
     }
 
     public boolean isAvailable() {
-        return !occupied && !dirty;
+        return !isOccupied && !isDirty;
     }
 
-    // ✅ Make sure this method is here and correctly spelled
     public void checkIn() {
-        this.occupied = true;
-        this.dirty = true;
+        if (isAvailable()) {
+            isOccupied = true;
+            isDirty = true;
+            System.out.println("Checked into room successfully.");
+        } else {
+            System.out.println("Room not available for check-in.");
+        }
     }
 
-    public void checkout() {
-        this.occupied = false;
-        this.dirty = true;
+    public void checkOut() {
+        if (isOccupied) {
+            isOccupied = false;
+            System.out.println("Checked out of room. Room needs cleaning.");
+        } else {
+            System.out.println("Room is not currently occupied.");
+        }
     }
 
     public void cleanRoom() {
-        this.dirty = false;
+        if (!isOccupied && isDirty) {
+            isDirty = false;
+            System.out.println("Room cleaned successfully.");
+        } else {
+            System.out.println("Room cannot be cleaned right now.");
+        }
     }
 }

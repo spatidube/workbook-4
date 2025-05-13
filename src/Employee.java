@@ -1,22 +1,41 @@
-
-
 public class Employee {
-    private int employeeId;
+    private String employeeId;
     private String name;
     private String department;
     private double payRate;
     private double hoursWorked;
 
-    public Employee(int employeeId, String name, String department, double payRate, double hoursWorked) {
+    private boolean isPunchedIn;
+    private double startTime;
+
+    public Employee(String employeeId, String name, String department, double payRate, double hoursWorked) {
         this.employeeId = employeeId;
         this.name = name;
         this.department = department;
         this.payRate = payRate;
         this.hoursWorked = hoursWorked;
+        this.isPunchedIn = false;
     }
 
-    public double getTotalPay() {
-        return payRate * hoursWorked;
+    public void punchIn(double time) {
+        if (!isPunchedIn) {
+            startTime = time;
+            isPunchedIn = true;
+            System.out.println(name + " punched in at " + time);
+        } else {
+            System.out.println(name + " is already punched in.");
+        }
+    }
+
+    public void punchOut(double time) {
+        if (isPunchedIn) {
+            double workedHours = time - startTime;
+            hoursWorked += workedHours;
+            isPunchedIn = false;
+            System.out.println(name + " punched out at " + time + ". Worked " + workedHours + " hours.");
+        } else {
+            System.out.println(name + " has not punched in.");
+        }
     }
 
     public double getRegularHours() {
@@ -27,11 +46,7 @@ public class Employee {
         return Math.max(0, hoursWorked - 40);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getDepartment() {
-        return department;
+    public double getTotalPay() {
+        return getRegularHours() * payRate + getOvertimeHours() * payRate * 1.5;
     }
 }
